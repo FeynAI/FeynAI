@@ -1,8 +1,10 @@
 # Gemma 2 AI Hackathon - FeynAI
 
-An app that utilises the Feynman technique to test your knowledge and help you know what you don't know.
+Main repo of the FeynAI app that utilises the Feynman technique to test your knowledge and help you know what you don't know.
 
-## Getting started
+## Backend
+
+### Getting started
 
 To install and use the backend
 
