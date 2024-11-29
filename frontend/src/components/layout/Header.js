@@ -1,21 +1,26 @@
 import Button from "@/components/ui/Button";
 
 // Header reusable component.
+// Header.js
 export default function Header() {
   return (
-    <header className="flex items-center justify-between w-full max-w-[1440px] relative mt-10">
-      <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-        <h1 className="text-4xl font-bold flex items-baseline gap-2">
+    <header className="w-full max-w-[1440px] px-4 md:px-6 lg:px-8 relative flex flex-col items-center">
+      {/* Center text container */}
+      <div className="text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
           Feyn
         </h1>
-        <p className="text-lg text-gray-600">"If you want to master something, teach it."</p>
+        <p className="text-sm md:text-base lg:text-lg text-gray-600 mt-1">
+          "If you want to master something, teach it."
+        </p>
       </div>
       
-      <div></div>
-      
-      <Button className="bg-[#e5e2df] hover:bg-[#d8d5d2] text-black font-normal py-2 px-4 rounded-lg transition-colors duration-200">
-        Meet Feyn
-      </Button>
+      {/* Button - underneath on mobile and tablet, right-aligned only on desktop */}
+      <div className="mt-6 xl:mt-0 xl:absolute xl:right-8">
+        <Button className="bg-[#e5e2df] hover:bg-[#d8d5d2] text-black font-normal py-2 px-8 rounded-lg transition-colors duration-200 text-sm md:text-base w-fit">
+          Meet Feyn
+        </Button>
+      </div>
     </header>
   );
 }

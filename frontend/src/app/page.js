@@ -11,7 +11,7 @@ export default function Home() {
         <header className="flex justify-center items-center py-4">
           <Header />
         </header>
-        <main className="flex flex-col flex-grow items-center justify-start p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+        <main className="flex flex-col flex-grow items-center justify-start p-4 md:p-8 lg:p-20">
           <HeroSection />
           <HowItWorksSection />
         </main>
