@@ -1,7 +1,4 @@
-// src/lib/api/axios.js
-'use client';  // Add this since we're using browser APIs
-
-const axios = require('axios');  // Use require instead of import
+import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
@@ -10,6 +7,7 @@ const api = axios.create({
   },
 });
 
+// Add request interceptor for auth token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
