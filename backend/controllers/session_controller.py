@@ -48,3 +48,16 @@ async def start_new_session(topic: str, current_user, db: Session):
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Failed to start session: {e}")
+
+async def get_all_sessions(current_user, db: Session):
+    """
+    Retrieve all sessions for the currently logged-in user.
+    """
+    try:
+        sessions = db.query(SessionModel).filter(
+            SessionModel.user_id == current_user.id
+        ).all()
+
+        return [{"id": session.id, "topic": session.topic, "score": session.score} for session in sessions]
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch sessions: {e}")
