@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Mindmap with Tooltips</title>
+
+    <!-- Include Vis.js CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"
+    />
+    <!-- Include custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Interactive Mindmap with Tooltips</h1>
+    <div class="input-container">
+      <input type="text" id="topicInput" placeholder="Enter a new topic" />
+      <button onclick="addNewTopic()">Start New Topic</button>
+    </div>
+    <div class="input-container">
+      <input type="text" id="questionInput" placeholder="Enter a question" />
+      <button onclick="addQuestion()">Add Question</button>
+    </div>
+    <div id="mindmap"></div>
+
+    <!-- Include Vis.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <!-- Include custom JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
