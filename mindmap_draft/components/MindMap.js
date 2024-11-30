@@ -71,33 +71,9 @@ class MindMapDisplay {
       easing: Konva.Easings.EaseInOut,
     });
 
-    // add a text description of the node in the view
-    const text = node.getChildren()[1].text();
-
-    const description = new Konva.Text({
-      text,
-      fontSize: Math.floor(14),
-      fontFamily: "Poppins",
-      fill: "black",
-      align: "center",
-      padding: Math.floor(14),
-    });
-
-    const descriptionGroup = new Konva.Group({
-      x: node.x(),
-      y: node.y() + node.height() * newScale / 2 + 20,
-      draggable: false,
-      scale: { x: 1 / newScale, y: 1 / newScale },
-    });
-
-    descriptionGroup.add(description);
-    layer.add(descriptionGroup);
-    layer.draw();
-
-
   }
 
-  createNode(x, y, text, deepness=1) {
+  createNode(x, y, text, answer, deepness=1) {
     const text_string_size_limit = 40;
     if (text.length > text_string_size_limit) {
       text = text.substring(0, text_string_size_limit) + '...';
@@ -106,9 +82,11 @@ class MindMapDisplay {
 
     const label = new Konva.Text({
       text,
+      width: 200,
+
       fontSize: Math.floor(14),
       fontFamily: "Poppins",
-      fill: "black",
+      fill: "white",
       align: "center",
       padding: Math.floor(14),
     });
@@ -120,15 +98,43 @@ class MindMapDisplay {
     const rect = new Konva.Rect({
       width: label.width(),
       height: label.height(),
-      fill: "white",
+      fill: "#0065BD",
       stroke: "black",
       strokeWidth: 0.7,
-      cornerRadius: 100
+      cornerRadius: [10, 10, 0, 0]
     });
     rect.offsetX(rect.width() / 2);
     rect.offsetY(rect.height() / 2);
 
-    group.add(rect, label);
+    const answerLabel = new Konva.Text({
+      text: answer,
+      fontSize: Math.floor(12),
+      width: 200,
+      fontFamily: "Poppins",
+      fill: "gray",
+      align: "center",
+      padding: Math.floor(10),
+      cornerRadius: 1
+    });
+    answerLabel.offsetX(answerLabel.width() / 2);
+    answerLabel.offsetY(0);
+    answerLabel.x(0);
+    answerLabel.y(rect.height() / 2)
+
+    const answerRect = new Konva.Rect({
+      width: answerLabel.width(),
+      height: answerLabel.height(),
+      fill: "white",
+      stroke: "gray",
+      strokeWidth: 1,
+      cornerRadius: [0, 0, 10, 10]
+    });
+    answerRect.offsetX(answerRect.width() / 2);
+    answerRect.offsetY(0);
+    answerRect.x(0);
+    answerRect.y(rect.height() / 2);
+
+    group.add(rect, label, answerRect, answerLabel);
     this.layer.add(group);
     this.layer.moveToTop(); // Move the layer to the top to ensure nodes are above the lines
 
