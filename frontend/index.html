@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Mindmap with Tooltips</title>
+    <title>Interactive Mind Map with Tooltips</title>
 
     <!-- Include Vis.js CSS -->
     <link
@@ -12,22 +12,83 @@
     />
     <!-- Include custom CSS -->
     <link rel="stylesheet" href="styles.css" />
+    <!-- Include Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Interactive Mindmap with Tooltips</h1>
     <div class="input-container">
       <input type="text" id="topicInput" placeholder="Enter a new topic" />
-      <button onclick="addNewTopic()">Start New Topic</button>
+      <button id="addTopicButton">Start New Topic</button>
     </div>
     <div class="input-container">
       <input type="text" id="questionInput" placeholder="Enter a question" />
-      <button onclick="addQuestion()">Add Question</button>
+      <button id="addQuestionButton">Add Question</button>
     </div>
     <div id="mindmap"></div>
 
     <!-- Include Vis.js JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
     <!-- Include custom JavaScript -->
-    <script src="script.js"></script>
+    <script type="module">
+      import { MindMap } from "./script.js";
+
+      const inputData = {
+        initial_prompt: "Cosmology",
+        questions: {
+          question: "What is Cosmology?",
+          answer: "Cosmology is the study of the universe.",
+          follow_up: [
+            {
+              question: "What is the study of the universe?",
+              answer:
+                "The universe is the study of everything that exists, including stars, planets, galaxies, and the space between them.",
+              follow_up: null,
+            },
+            {
+              question: "how big is the universe?",
+              answer:
+                "The universe is infinite in size for our comprehension and still growing.",
+              follow_up: {
+                question: "How do we know the universe is infinite?",
+                answer:
+                  "We know the universe is infinite because we can see the light from stars that are billions of light_years away.",
+                "follow-up": null,
+              },
+            },
+          ],
+        },
+      };
+      const mindMap = new MindMap("mindmap", inputData);
+      mindMap.draw();
+      console.log("Mind Map created successfully : ", mindMap);
+
+      function updateDOM() {
+        // Your logic to update the DOM goes here
+        console.log("Network changed, update the DOM accordingly.");
+      }
+
+      document
+        .getElementById("addTopicButton")
+        .addEventListener("click", () => {
+          const topicInput = document.getElementById("topicInput");
+          mindMap.addNewTopic(topicInput.value.trim());
+          topicInput.value = "";
+        });
+
+      document
+        .getElementById("addQuestionButton")
+        .addEventListener("click", () => {
+          const questionInput = document.getElementById("questionInput");
+          mindMap.addQuestion(questionInput.value.trim());
+          questionInput.value = "";
+        });
+    </script>
   </body>
 </html>
