@@ -82,11 +82,11 @@ class MindMapDisplay {
 
     const label = new Konva.Text({
       text,
-      width: 200,
-
+      width: 250,
+      fontStyle: 600,
       fontSize: Math.floor(14),
       fontFamily: "Poppins",
-      fill: "white",
+      fill: "black",
       align: "center",
       padding: Math.floor(14),
     });
@@ -98,7 +98,7 @@ class MindMapDisplay {
     const rect = new Konva.Rect({
       width: label.width(),
       height: label.height(),
-      fill: "#0065BD",
+      fill: "white",
       stroke: "black",
       strokeWidth: 0.7,
       cornerRadius: [10, 10, 0, 0]
@@ -109,10 +109,10 @@ class MindMapDisplay {
     const answerLabel = new Konva.Text({
       text: answer,
       fontSize: Math.floor(12),
-      width: 200,
+      fontStyle: 300,
+      width: 250,
       fontFamily: "Poppins",
-      fill: "gray",
-      align: "center",
+      fill: "white",
       padding: Math.floor(10),
       cornerRadius: 1
     });
@@ -124,8 +124,8 @@ class MindMapDisplay {
     const answerRect = new Konva.Rect({
       width: answerLabel.width(),
       height: answerLabel.height(),
-      fill: "white",
-      stroke: "gray",
+      fill: "#99B0DB",
+      stroke: "black",
       strokeWidth: 1,
       cornerRadius: [0, 0, 10, 10]
     });
@@ -147,7 +147,7 @@ class MindMapDisplay {
   connectNodes(node1, node2,deepness=1) {
     const line = new Konva.Line({
       points: [node1.x(), node1.y(), node2.x(), node2.y()],
-      stroke: "black",
+      stroke: "white",
       strokeWidth: (0.5**deepness)*2,
       tension: 0.5,
     });
