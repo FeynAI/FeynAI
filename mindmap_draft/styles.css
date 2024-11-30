@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(to top, #b8cbff, #e3f2ff);
+  font-family: Poppins;
+  color: #ffffff; /* White text color */
+}
+
+canvas {
+  display: block;
+  background-color: #ffffff; /* White background for the canvas */
+  border: 1px solid #1e3a8a; /* Dark blue border */
+}
