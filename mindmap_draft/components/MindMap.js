@@ -44,6 +44,15 @@ class MindMapDisplay {
   }
 
   zoomOnNode(node) {
+    console.log(node);
+    // get node layer
+
+    const layer = node.getLayer();
+    console.log("layer",layer);
+    // get object in layer
+
+    const object = layer.getChildren();
+    console.log("object",object);
     const deepness = node.getAttr('deepness');
     console.log(deepness);
     const newScale = 1.5*deepness;
@@ -61,6 +70,31 @@ class MindMapDisplay {
       duration: 0.5,
       easing: Konva.Easings.EaseInOut,
     });
+
+    // add a text description of the node in the view
+    const text = node.getChildren()[1].text();
+
+    const description = new Konva.Text({
+      text,
+      fontSize: Math.floor(14),
+      fontFamily: "Poppins",
+      fill: "black",
+      align: "center",
+      padding: Math.floor(14),
+    });
+
+    const descriptionGroup = new Konva.Group({
+      x: node.x(),
+      y: node.y() + node.height() * newScale / 2 + 20,
+      draggable: false,
+      scale: { x: 1 / newScale, y: 1 / newScale },
+    });
+
+    descriptionGroup.add(description);
+    layer.add(descriptionGroup);
+    layer.draw();
+
+
   }
 
   createNode(x, y, text, deepness=1) {
