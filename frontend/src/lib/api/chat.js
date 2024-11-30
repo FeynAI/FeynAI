@@ -1,25 +1,33 @@
 // src/lib/api/chat.js
-import api from './axios';
+import api from "./axios";
 
 export const chatApi = {
   submitAnswer: async (sessionId, input, topic) => {
     const formData = new FormData();
-    
-    if (typeof input === 'string') {
-      formData.append('input_text', input);
-    } else {
-      formData.append('input', input);
-    }
-    
-    formData.append('session_id', sessionId);
-    formData.append('topic', topic);
 
-    const response = await api.post('/submit-answer', formData, {
+    // Add either input text or file
+    if (typeof input === "string") {
+      formData.append("input_text", input);
+    } else {
+      formData.append("input", input);
+    }
+
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      throw new Error("Access token not found");
+    }
+
+    const response = await api.post("/submit-answer", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      params: {
+        session_id: sessionId,
+        topic: topic,
       },
     });
-    
+
     return response.data;
-  }
+  },
 };

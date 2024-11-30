@@ -7,6 +7,8 @@ import ChatSidebar from "@/components/layout/ChatSidebar";
 import ChatConversation from "@/components/features/ChatConversation";
 import ChatInput from "@/components/features/ChatInput";
 import { useChat } from '@/lib/hooks/useChat';
+import { chatApi } from "@/lib/api/chat";
+
 
 export default function ChatInterfaceScreen() {
  const { 
@@ -17,8 +19,14 @@ export default function ChatInterfaceScreen() {
    error, 
    clearError, 
    loadSessions,
-   startNewSession 
+   startNewSession,
+   handleNewMessage 
  } = useChat();
+
+ // Monitor messages changes
+ useEffect(() => {
+   console.log('Messages updated in ChatInterfaceScreen:', messages);
+ }, [messages]);
 
  // Load sessions on mount
  useEffect(() => {
@@ -66,12 +74,9 @@ export default function ChatInterfaceScreen() {
 
  return (
    <div className="h-screen flex flex-col">
-     {/* Header */}
      <ChatHeader />
      
-     {/* Main content */}
      <div className="flex flex-1 overflow-hidden">
-       {/* Sidebar */}
        <ChatSidebar 
          onChatSelect={handleChatSelect}
          onTopicSelect={handleTopicSelect}
@@ -79,25 +84,29 @@ export default function ChatInterfaceScreen() {
          sessions={sessions}
          loading={loading}
        />
+          
 
-       {/* Chat area */}
        <div className="flex-1 flex flex-col">
-         {/* Error Message */}
          {error && <ErrorMessage message={error} />}
          
-         {/* Messages */}
-         {loading ? (
-           <LoadingSpinner />
-         ) : (
-           <ChatConversation 
-             messages={messages}
-             loading={loading}
-           />
-         )}
+         {/* Chat area with relative positioning */}
+         <div className="flex-1 flex flex-col relative">
+           {loading ? (
+             <LoadingSpinner />
+           ) : (
+             <ChatConversation 
+               key={messages.length} // Force re-render when messages change
+               messages={messages}
+               loading={loading}
+             />
+           )}
+         </div>
+          
 
          {/* Input area */}
          <ChatInput 
-           disabled={loading || !currentSession} 
+           disabled={false}  // Temporarily set to false to allow input
+           onSubmit={handleNewMessage}
          />
 
          {/* Terms and conditions */}

@@ -1,31 +1,4 @@
-// import Image from "next/image";
-// import Header from "@/components/layout/Header";
-// import HowItWorksSection from "@/components/features/HowItWorksSection";
-// import HeroSection from "@/components/features/HeroSection";
-// import ConversationStarterScreen from "@/components/features/ConversationStarterScreen";
-
-// export default function Home() {
-//   return (
-//     <div className="snap-y snap-mandatory">
-//       <div className="min-h-screen flex flex-col snap-start">
-//         <header className="flex justify-center items-center py-4">
-//           <Header />
-//         </header>
-//         <main className="flex flex-col flex-grow items-center justify-start p-4 md:p-8 lg:p-20">
-//           <HeroSection />
-//           <HowItWorksSection />
-//         </main>
-//       </div>
-//       <div className="min-h-screen snap-start">
-//         <ConversationStarterScreen />
-//       </div>
-//     </div>
-//   );
-// }
-
-// src/app/page.js
-
-export default function Home() {
+export default function WelcomePage() {
   return (
     <div
       className="h-screen flex flex-col items-center justify-center"
@@ -35,7 +8,11 @@ export default function Home() {
     >
       {/* Logo and Title */}
       <div className="flex items-center mb-4">
-        <img src="/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
+        <img
+          src="/logo.png"
+          alt="FeynAI Logo"
+          className="w-16 h-16 mr-2"
+        />
         <h1
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -65,6 +42,7 @@ export default function Home() {
 
       {/* Buttons */}
       <div className="flex space-x-4">
+        {/* Login Button */}
         <a href="/login">
           <button
             className="rounded-lg hover:opacity-90"
@@ -82,6 +60,7 @@ export default function Home() {
           </button>
         </a>
 
+        {/* Signup Button */}
         <a href="/signup">
           <button
             className="rounded-lg hover:opacity-90"
