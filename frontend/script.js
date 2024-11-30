@@ -15,11 +15,9 @@ class MindMap {
       { nodes: this.nodes, edges: this.edges },
       mindMapStyle
     );
+    console.log("network",this.network);
     this.activeChainParentId = null;
-    this.initializeHoverEvent();
-    this.network.redraw();
   }
-
 
   addNewTopic(topic) {
     if (topic) {
@@ -68,9 +66,7 @@ class MindMap {
     }
   }
 
-  draw() {
-    this.network.redraw();
-  }
+
 }
 
 export { MindMap };
