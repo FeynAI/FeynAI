@@ -1,4 +1,4 @@
-class MindMapDisplay {
+class MindMapRenderer {
   constructor(containerId) {
     this.stage = new Konva.Stage({
       container: containerId,
@@ -124,10 +124,14 @@ class MindMapDisplay {
     const answerRect = new Konva.Rect({
       width: answerLabel.width(),
       height: answerLabel.height(),
-      fill: "#99B0DB",
+      fill: "#b8cbff",
       stroke: "black",
       strokeWidth: 1,
-      cornerRadius: [0, 0, 10, 10]
+      cornerRadius: [0, 0, 10, 10],
+      shadowColor: 'black',
+      shadowBlur: 4,
+      shadowOffset: { x: 0, y: 4 },
+      shadowOpacity: 0.5
     });
     answerRect.offsetX(answerRect.width() / 2);
     answerRect.offsetY(0);
@@ -167,4 +171,4 @@ class MindMapDisplay {
   }
 }
 
-export { MindMapDisplay };
+export { MindMapRenderer };
