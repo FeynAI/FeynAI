@@ -55,7 +55,7 @@ function ChatContent() {
       const token = localStorage.getItem("access_token");
       if (!token) {
         alert("No access token found. Redirecting to login.");
-        router.push("https://feynai.onrender.com/login");
+        router.push("/login");
         return;
       }
       const response = await chatApi.submitAnswer(sessionId, input, topic);

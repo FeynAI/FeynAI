@@ -17,7 +17,7 @@ export const chatApi = {
       throw new Error("Access token not found");
     }
 
-    const response = await api.post("/submit-answer", formData, {
+    const response = await api.post("https://feynai.onrender.com/submit-answer", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -36,7 +36,7 @@ export const chatApi = {
     if (!token) {
       throw new Error("Access token not found");
     }
-    const response = await api.get(`/sessions/${sessionId}/mindmap`, {
+    const response = await api.get(`https://feynai.onrender.com/sessions/${sessionId}/mindmap`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,7 +49,7 @@ export const chatApi = {
     if (!token) {
       throw new Error("Access token not found");
     }
-    const response = await api.patch(`/sessions/${sessionId}/mindmap/nodes/${nodeId}`, data, {
+    const response = await api.patch(`https://feynai.onrender.com/sessions/${sessionId}/mindmap/nodes/${nodeId}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
