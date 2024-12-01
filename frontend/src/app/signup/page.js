@@ -17,7 +17,7 @@ export default function SignupPage() {
       return;
     }
     try {
-      await axios.post("/auth/signup", { email: formData.email, password: formData.password });
+      await axios.post("https://feynai.onrender.com/auth/signup", { email: formData.email, password: formData.password });
       alert("Signup successful!");
       window.location.href = "/login"; // Redirect to login screen
     } catch (error) {
@@ -125,7 +125,7 @@ export default function SignupPage() {
           }}
         >
           Already have an account?{" "}
-          <a href="https://feynai.onrender.com/login" className="text-blue-600 hover:underline">
+          <a href="/login" className="text-blue-600 hover:underline">
             Log in
           </a>
         </p>

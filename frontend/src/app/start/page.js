@@ -30,7 +30,7 @@ export default function StartScreen() {
           return;
         }
 
-        const response = await axios.get("/auth/me", {
+        const response = await axios.get("https://feynai.onrender.com/auth/me", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -55,7 +55,7 @@ export default function StartScreen() {
       }
 
       const response = await axios.post(
-        "/sessions/start-session",
+        "https://feynai.onrender.com/sessions/start-session",
         { topic },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -13,7 +13,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("/auth/login", formData);
+      const response = await axios.post("https://feynai.onrender.com/auth/login", formData);
       localStorage.setItem("access_token", response.data.access_token); // Save JWT in localStorage
       console.log(localStorage.getItem("access_token"))
       alert("Login successful!");
@@ -104,7 +104,7 @@ export default function LoginPage() {
           }}
         >
           Don’t have an account?{" "}
-          <a href="https://feynai.onrender.com/signup" className="text-blue-600 hover:underline">
+          <a href="/signup" className="text-blue-600 hover:underline">
             Sign up
           </a>
         </p>
