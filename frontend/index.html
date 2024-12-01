@@ -40,30 +40,42 @@
       import { MindMap } from "./script.js";
 
       const inputData = {
-        initial_prompt: "Cosmology",
-        questions: {
-          question: "What is Cosmology?",
-          answer: "Cosmology is the study of the universe.",
-          follow_up: [
-            {
-              question: "What is the study of the universe?",
-              answer:
-                "The universe is the study of everything that exists, including stars, planets, galaxies, and the space between them.",
-              follow_up: null,
-            },
-            {
-              question: "how big is the universe?",
-              answer:
-                "The universe is infinite in size for our comprehension and still growing.",
-              follow_up: {
-                question: "How do we know the universe is infinite?",
-                answer:
-                  "We know the universe is infinite because we can see the light from stars that are billions of light_years away.",
-                "follow-up": null,
+        questions: [
+          {
+            nodeId: "1",
+            q: "Root question",
+            a: "Answer 1",
+            time: "2024-11-30",
+            parent: null,
+            followup: [
+              {
+                nodeId: "2",
+                q: "Child question 1",
+                a: "Answer 2",
+                time: "2024-11-30",
+                parent: "1",
+                followup: [
+                  {
+                    nodeId: "4",
+                    q: "Grandchild question",
+                    a: "Answer 4",
+                    time: "2024-11-30",
+                    parent: "2",
+                    followup: [],
+                  },
+                ],
               },
-            },
-          ],
-        },
+              {
+                nodeId: "3",
+                q: "Child question 2",
+                a: "Answer 3",
+                time: "2024-11-30",
+                parent: "1",
+                followup: [],
+              },
+            ],
+          },
+        ],
       };
       const mindMap = new MindMap("mindmap", inputData);
       console.log("Mind Map created successfully : ", mindMap);
