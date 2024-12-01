@@ -191,8 +191,7 @@ export default function StartScreen() {
               letterSpacing: "-0.007em",
             }}
           >
-            {/* Hello, {user?.email || "User"} */}
-            Welcome
+            Hello, {user?.email.split("@")[0] || "User"}
           </h2>
           <p
             className="mt-8"
