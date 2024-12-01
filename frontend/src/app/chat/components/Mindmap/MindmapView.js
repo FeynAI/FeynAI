@@ -27,7 +27,7 @@ export default function MindmapView({ sessionId, messages, topic }) {
         },
         shape: 'box',
         margin: 10,
-        physics: false
+        physics: true
       }
     ]);
 
@@ -108,8 +108,9 @@ export default function MindmapView({ sessionId, messages, topic }) {
 
     const options = {
       nodes: {
-        shape: 'box',
-        margin: 10,
+        shape: 'circle',
+        margin: 20,        // Add margin around nodes
+        physics: false,
         font: {
           face: 'Plus Jakarta Sans'
         },
@@ -117,28 +118,35 @@ export default function MindmapView({ sessionId, messages, topic }) {
         shadow: true
       },
       edges: {
-        width: 2,
+        width: 1,
+        color: { color: "black" },
+        arrows: "to",
         smooth: {
-          type: 'curvedCW',
-          roundness: 0.2
+          type: 'cubicBezier',    // Change curve type
+          forceDirection: 'horizontal', // Force horizontal flow
+          roundness: 0.4          // Reduce curve roundness
         }
       },
       layout: {
         hierarchical: {
-          direction: 'UD',
+          direction: 'LR', // Change to left-to-right direction
           sortMethod: 'directed',
-          levelSeparation: 100,
-          nodeSpacing: 160,
-          treeSpacing: 160
+          levelSeparation: 250,  // Increased horizontal spacing between levels
+          nodeSpacing: 100,      // Vertical spacing between nodes
+          treeSpacing: 200,      // Space between different branches
+          blockShifting: true,   // Allow shifting of blocks to reduce crowding
+          edgeMinimization: true,// Minimize edge crossing
+          parentCentralization: false, // Prevent parent node centering for better spacing
+          shakeTowards: 'leaves' // Help arrange nodes towards the leaves
         }
       },
-      physics: false,
+      physics: {
+        enabled: true,
+      },
       interaction: {
-        dragNodes: false,
+        hover: true,
         dragView: true,
         zoomView: true,
-        hover: true,
-        tooltipDelay: 300
       },
       groups: {
         question: {
@@ -149,6 +157,7 @@ export default function MindmapView({ sessionId, messages, topic }) {
         }
       }
     };
+
 
     if (!networkRef.current) {
       networkRef.current = new Network(containerRef.current, data, options);

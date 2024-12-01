@@ -95,7 +95,7 @@ export default function ChatPage() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
             }}
           >
-            Topic: {topic}
+            {/* Topic: {topic} */}
           </p>
         </div>
       </aside>
