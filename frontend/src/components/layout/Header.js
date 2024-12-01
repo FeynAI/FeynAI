@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import Button from "@/components/ui/Button";
 
 export default function Header() {
   return (
     <header className="w-full max-w-[1440px] px-4 md:px-6 lg:px-8 relative flex items-center justify-between">
       {/* Logo and title */}
       <div className="flex items-center">
-        <img src="/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+        <img src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold"
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -21,35 +22,12 @@ export default function Header() {
       </p>
 
       {/* Auth buttons */}
-      <div className="flex space-x-4">
-        <Link href="/login">
-          <button
-            className="rounded-lg hover:opacity-90 px-6 py-2"
-            style={{
-              backgroundColor: "#0065BD",
-              color: "#FFFFFF",
-              fontFamily: "'Manrope', sans-serif",
-              fontWeight: "bold",
-              fontSize: "16px",
-            }}
-          >
-            Log in
-          </button>
-        </Link>
-        <Link href="/signup">
-          <button
-            className="rounded-lg hover:opacity-90 px-6 py-2"
-            style={{
-              backgroundColor: "#ABABAB",
-              color: "#FFFFFF",
-              fontFamily: "'Manrope', sans-serif",
-              fontWeight: "bold",
-              fontSize: "16px",
-            }}
-          >
-            Sign up
-          </button>
-        </Link>
+      <div className="mt-6 xl:mt-0 xl:absolute xl:right-8">
+        <Button
+          className="bg-[#e5e2df] hover:bg-[#d8d5d2] text-black font-normal py-2 px-8 rounded-lg transition-colors duration-200 text-sm md:text-base w-fit"
+        >
+          Meet Feyn
+        </Button>
       </div>
     </header>
   );

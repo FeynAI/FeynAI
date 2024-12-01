@@ -85,7 +85,7 @@ export default function StartScreen() {
           {/* Header with Logo */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <img src="/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+              <img src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
               <h1
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -191,7 +191,8 @@ export default function StartScreen() {
               letterSpacing: "-0.007em",
             }}
           >
-            Hello, {user?.email || "User"}
+            {/* Hello, {user?.email || "User"} */}
+            Welcome
           </h2>
           <p
             className="mt-8"

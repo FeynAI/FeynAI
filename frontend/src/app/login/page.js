@@ -30,7 +30,7 @@ export default function LoginPage() {
       }}
     >
       <div className="flex items-center mb-6">
-        <img src="/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
+        <img src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
         <h1
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",

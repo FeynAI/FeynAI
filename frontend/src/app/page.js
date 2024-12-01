@@ -107,7 +107,7 @@
 import Header from "@/components/layout/Header";
 import HowItWorksSection from "@/components/features/HowItWorksSection";
 import HeroSection from "@/components/features/HeroSection";
-import { StartScreen } from "./start/page";
+import ConversationStarterScreen from "@/components/features/ConversationStarterScreen";
 
 export default function Home() {
   return (
@@ -127,7 +127,7 @@ export default function Home() {
         </main>
       </div>
       <div className="min-h-screen snap-start">
-        {/* <StartScreen /> */}
+        <ConversationStarterScreen />
       </div>
     </div>
   );

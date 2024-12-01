@@ -78,7 +78,7 @@ export default function ChatPage() {
       <aside className="w-64 flex-shrink-0 h-full border-r border-gray-200">
         <div className="p-6">
           <div className="flex items-center mb-6">
-            <img src="/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+            <img src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
             <h1
               className="text-xl font-bold"
               style={{
@@ -113,8 +113,8 @@ export default function ChatPage() {
               >
                 <div
                   className={`inline-block px-4 py-2 rounded-lg max-w-[80%] ${message.role === "user"
-                      ? "bg-[#0065BD] text-white"
-                      : "bg-gray-100 text-[#1E293B]"
+                    ? "bg-[#0065BD] text-white"
+                    : "bg-gray-100 text-[#1E293B]"
                     }`}
                   style={{
                     fontFamily: "'Plus Jakarta Sans', sans-serif",

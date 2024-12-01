@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'feyn-blue': '#0065BD',
       },
       fontFamily: {
         helvetica: ['var(--font-helvetica-neue-medium)', 'Helvetica', 'Arial', 'sans-serif']
