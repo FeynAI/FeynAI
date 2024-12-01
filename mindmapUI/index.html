@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Mind Map with Tooltips</title>
+
+    <!-- Include Vis.js CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"
+    />
+    <!-- Include custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Include Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="input-container">
+      <input type="text" id="topicInput" placeholder="Enter a new topic" />
+      <button id="addTopicButton">Start New Topic</button>
+    </div>
+    <div class="input-container">
+      <input type="text" id="questionInput" placeholder="Enter a question" />
+      <button id="addQuestionButton">Add Question</button>
+    </div>
+    <div id="mindmap"></div>
+
+    <!-- Include Vis.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <!-- Include custom JavaScript -->
+    <script type="module">
+      import { MindMap } from "./script.js";
+    
+      const inputData = {
+        initial_prompt: "Cosmology",
+        questions: {
+          question: "What is Cosmology?",
+          answer: "Cosmology is the study of the universe.",
+          follow_up: [
+            {
+              question: "What is the study of the universe?",
+              answer:
+                "The universe is the study of everything that exists, including stars, planets, galaxies, and the space between them.",
+              follow_up: null,
+            },
+            {
+              question: "How big is the universe?",
+              answer:
+                "The universe is infinite in size for our comprehension and still growing.",
+              follow_up: {
+                question: "How do we know the universe is infinite?",
+                answer:
+                  "We know the universe is infinite because we can see the light from stars that are billions of light-years away.",
+                follow_up: null,
+              },
+            },
+          ],
+        },
+      };
+    
+      const mindmap = new MindMap("mindmap", inputData);
+    
+      // Attach DOM event listeners
+      document.getElementById("addTopicButton").addEventListener("click", () => {
+        const topicInput = document.getElementById("topicInput").value.trim();
+        mindmap.addNewTopic(topicInput);
+        document.getElementById("topicInput").value = ""; // Clear the input field
+      });
+    
+      document.getElementById("addQuestionButton").addEventListener("click", () => {
+        const questionInput = document.getElementById("questionInput").value.trim();
+        mindmap.addQuestion(questionInput);
+        document.getElementById("questionInput").value = ""; // Clear the input field
+      });
+    
+      document.getElementById("closePopup").addEventListener("click", () => {
+        mindmap.closePopup();
+      });
+    
+      document.getElementById("button1").addEventListener("click", () => {
+        mindmap.button1Action();
+      });
+    
+      document.getElementById("button2").addEventListener("click", () => {
+        mindmap.button2Action();
+      });
+    
+      document.getElementById("button3").addEventListener("click", () => {
+        mindmap.button3Action();
+      });
+    </script>
+  </body>
+</html>
