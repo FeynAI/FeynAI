@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from utils.llm import get_follow_up_question
+from utils.llm import get_initial_question
 from utils.session_service import create_session_id
 from utils.chat_history_service import save_chat_message
 from models.session import Session as SessionModel
@@ -13,7 +13,7 @@ async def start_new_session(topic: str, current_user, db: Session):
     session_id = create_session_id()
 
     # Generate the initial question
-    initial_question = get_follow_up_question(None, topic)
+    initial_question = get_initial_question(topic)
     if not initial_question:
         raise HTTPException(
             status_code=500,

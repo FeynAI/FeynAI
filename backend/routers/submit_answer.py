@@ -3,11 +3,11 @@ from sqlalchemy.orm import Session
 from utils.db import get_db_session
 from utils.auth import get_current_user
 from controllers.submit_answer_controller import process_answer
-from schemas.response import AudioResponse
+from schemas.response import ModelResponse
 
 router = APIRouter(prefix="/submit-answer", tags=["Submit Answer"])
 
-@router.post("/", response_model=AudioResponse)
+@router.post("/", response_model=ModelResponse)
 async def submit_answer(
     input: UploadFile = File(None),  # File input (optional)
     input_text: str = Form(None),   # Text input (optional, mutually exclusive with `input`)

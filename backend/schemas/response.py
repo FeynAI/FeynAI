@@ -1,9 +1,6 @@
 from pydantic import BaseModel
 
-class AudioResponse(BaseModel):
+class ModelResponse(BaseModel):
     message: str
     follow_up_question: str = None
-
-class TextResponse(BaseModel):
-    message: str
-    follow_up_question: str = None
+    score: int = None

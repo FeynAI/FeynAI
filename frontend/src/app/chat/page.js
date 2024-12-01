@@ -63,7 +63,7 @@ export default function ChatPage() {
       setMessages((prevMessages) => [
         ...prevMessages,
         { role: "user", content: input },
-        { role: "assistant", content: response.message },
+        { role: "assistant", content: response.follow_up_question },
       ]);
 
       setInput(""); // Clear input after successful submission
