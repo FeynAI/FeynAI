@@ -30,4 +30,30 @@ export const chatApi = {
 
     return response.data;
   },
+
+  getMindmapData: async (sessionId) => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      throw new Error("Access token not found");
+    }
+    const response = await api.get(`/sessions/${sessionId}/mindmap`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+
+  updateMindmapNode: async (sessionId, nodeId, data) => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      throw new Error("Access token not found");
+    }
+    const response = await api.patch(`/sessions/${sessionId}/mindmap/nodes/${nodeId}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  }
 };
