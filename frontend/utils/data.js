@@ -1,24 +1,29 @@
-//useless for the moment, going to switch to a backend solution
+// type QuestionNode = {
+//   nodeId: string;
+//   q: string;
+//   a: string;
+//   time: string;
+//   parent: string | null;
+//   followup?: QuestionNode[];
+// };
+
 class DataHandler {
-  loadData() {
-    const savedNodes = localStorage.getItem('nodes');
-    const savedEdges = localStorage.getItem('edges');
-    if (savedNodes) {
-      this.nodes = new vis.DataSet(JSON.parse(savedNodes));
-    }
-    if (savedEdges) {
-      this.edges = new vis.DataSet(JSON.parse(savedEdges));
-    }
-    if (this.nodes.length > 0) {
-      this.nodeIdCounter = Math.max(...this.nodes.getIds()) + 1;
-    }
-    return this;
+  addRootNode(createdId,topic) {
+    // root node is a topic
+    let root_node= { nodeId: createdId, q: topic, a: "", time: new Date().toISOString(), parent: null };
+    this.postData(root_node);
   }
 
-  saveData() {
-    localStorage.setItem('nodes', JSON.stringify(this.nodes.get()));
-    localStorage.setItem('edges', JSON.stringify(this.edges.get()));
+  addNode(question,answer, parentNodeId) {
+    let node = {nodeId: parentNodeId, q: question, a: answer, time: new Date().toISOString(), parent: parentNodeId };
+    this.postData(node);
   }
+
+  postData(data) {
+    //TODO: replace the placeholder with the actual POST request
+    pass;
+  }
+
 }
 
 export default DataHandler;

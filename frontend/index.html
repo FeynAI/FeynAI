@@ -86,7 +86,7 @@
         .getElementById("addQuestionButton")
         .addEventListener("click", () => {
           const questionInput = document.getElementById("questionInput");
-          mindMap.addQuestion(questionInput.value.trim());
+          mindMap.addQuestion(questionInput.value.trim(), "");
           questionInput.value = "";
         });
     </script>

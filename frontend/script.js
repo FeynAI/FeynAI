@@ -1,6 +1,7 @@
 import { getCSSVariableValue } from "./utils/style.js";
 import { convertData } from "./dataloader.js";
 import { mindMapStyle } from "./mindmapstyle.js";
+import DataHandler from "./utils/data.js";
 
 class MindMap {
   constructor(containerId, data) {
@@ -39,12 +40,13 @@ class MindMap {
       });
       this.activeChainParentId = topicId;
       this.network.redraw();
+      DataHandler.addNode(topicId,topic);
     } else {
       alert("Please enter a topic!");
     }
   }
 
-  addQuestion(question) {
+  addQuestion(question, answer) {
     if (question) {
       const selectedNodes = this.network.getSelectedNodes();
       if (selectedNodes.length === 0) {
@@ -67,6 +69,8 @@ class MindMap {
         to: questionId,
       });
       this.network.redraw();
+      DataHandler.addRootNode(question,answer,parentId);
+      //TODO: replace the placeholder answer : "" with the actual answer
     } else {
       alert("Please enter a question!");
     }
