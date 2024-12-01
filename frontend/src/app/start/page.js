@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "../../utils/api";
+import Image from "next/image";
 
 export default function StartScreen() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function StartScreen() {
       );
 
       const { session_id, question } = response.data;
-      alert(`Session started: ${question}`);
+      // alert(`Session started: ${question}`);
       router.push(`/chat?session_id=${session_id}&topic=${topic}`);
     } catch (error) {
       console.error("Error starting session:", error);
@@ -85,7 +86,7 @@ export default function StartScreen() {
           {/* Header with Logo */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <img src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+              <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
               <h1
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",

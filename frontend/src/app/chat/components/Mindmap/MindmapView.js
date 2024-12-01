@@ -200,7 +200,7 @@ export default function MindmapView({ sessionId, messages, topic }) {
         networkRef.current = null;
       }
     };
-  }, [messages, topic]);
+  }, [processMessages, messages, topic]);
 
   // Handle zoom controls
   const handleZoomIn = () => {

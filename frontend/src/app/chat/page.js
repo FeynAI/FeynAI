@@ -1,12 +1,13 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import axios from "../../utils/api";
 import { chatApi } from "@/lib/api/chat";
 import MindmapView from "./components/Mindmap/MindmapView";
 import MindmapControls from "./components/Mindmap/MindmapControls";
+import Image from "next/image";
 
-export default function ChatPage() {
+function ChatContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
@@ -21,11 +22,11 @@ export default function ChatPage() {
         const token = localStorage.getItem("access_token");
         if (!token) {
           alert("No access token found. Redirecting to login.");
-          router.push("/login");
+          router.push("https://feynai.onrender.com/login");
           return;
         }
         setIsLoading(true);
-        const response = await axios.get(`/sessions/${sessionId}/first-question`, {
+        const response = await axios.get(`https://feynai.onrender.com/sessions/${sessionId}/first-question`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMessages([
@@ -54,7 +55,7 @@ export default function ChatPage() {
       const token = localStorage.getItem("access_token");
       if (!token) {
         alert("No access token found. Redirecting to login.");
-        router.push("/login");
+        router.push("https://feynai.onrender.com/login");
         return;
       }
       const response = await chatApi.submitAnswer(sessionId, input, topic);
@@ -78,7 +79,7 @@ export default function ChatPage() {
       <aside className="w-64 flex-shrink-0 h-full border-r border-gray-200">
         <div className="p-6">
           <div className="flex items-center mb-6">
-            <img src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+            <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
             <h1
               className="text-xl font-bold"
               style={{
@@ -183,5 +184,13 @@ export default function ChatPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ChatContent />
+    </Suspense>
   );
 }

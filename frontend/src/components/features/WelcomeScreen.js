@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function WelcomePage() {
   return (
     <div
@@ -8,7 +10,7 @@ export default function WelcomePage() {
     >
       {/* Logo and Title */}
       <div className="flex items-center mb-4">
-        <img
+        <Image
           src="/logo.png"
           alt="FeynAI Logo"
           className="w-16 h-16 mr-2"

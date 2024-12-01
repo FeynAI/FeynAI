@@ -20,7 +20,7 @@ export default function ConversationStarterScreen() {
 
         <div className="flex flex-col justify-between h-[600px]">
           <h1 className="text-7xl font-semibold w-[600px] text-center">
-            Hi, I'm Feyn. I'm 12 years old and I love learning. I'm here to help you learn too!
+            Hi, I&#39;m Feyn. I&#39;m 12 years old and I love learning. I&#39;m here to help you learn too!
           </h1>
 
           {/* Centering the buttons */}

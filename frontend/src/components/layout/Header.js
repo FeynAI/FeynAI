@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import Button from "@/components/ui/Button";
+import Image from 'next/image';
 
 export default function Header() {
   return (
     <header className="w-full max-w-[1440px] px-4 md:px-6 lg:px-8 relative flex items-center justify-between">
       {/* Logo and title */}
       <div className="flex items-center">
-        <img src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold"
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -18,7 +19,7 @@ export default function Header() {
 
       {/* Tagline - hidden on mobile */}
       <p className="hidden md:block text-sm md:text-base lg:text-lg text-gray-600 absolute left-1/2 transform -translate-x-1/2">
-        "If you want to master something, teach it."
+        If you want to master something, teach it.
       </p>
 
       {/* Auth buttons */}

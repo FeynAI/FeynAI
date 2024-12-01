@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "../../utils/api";
+import Image from "next/image";
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
@@ -32,7 +33,7 @@ export default function SignupPage() {
       }}
     >
       <div className="flex items-center mb-6">
-        <img src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
+        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
         <h1
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -124,7 +125,7 @@ export default function SignupPage() {
           }}
         >
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
+          <a href="https://feynai.onrender.com/login" className="text-blue-600 hover:underline">
             Log in
           </a>
         </p>
