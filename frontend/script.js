@@ -20,15 +20,21 @@ class MindMap {
   }
 
   addNewTopic(topic) {
+    function htmlTitle(html) {
+      const container = document.createElement("div");
+      container.innerHTML = html;
+      return container;
+    }
     if (topic) {
       const topicId = this.nodeIdCounter++;
+      let title = `Topic: ${topic}`;
       this.nodes.add({
         id: topicId,
-        label: topic,
-        title: `Main Topic: ${topic}`,
-        font: { size: 20 },
-        color: { background: getCSSVariableValue("--topic-node-color") },
-        shape: "circle",
+        label: "",
+        title: htmlTitle(title),
+        zoomedTitle: topic,
+        color: { background: getCSSVariableValue("--topic-node-color"), border: "black" },
+        shape: "diamond",
         size: 30,
       });
       this.activeChainParentId = topicId;
@@ -40,26 +46,26 @@ class MindMap {
 
   addQuestion(question) {
     if (question) {
-      if (!this.activeChainParentId) {
-        alert("Please start a new topic first!");
+      const selectedNodes = this.network.getSelectedNodes();
+      if (selectedNodes.length === 0) {
+        alert("Please select a node to add the question to!");
         return;
       }
 
+      const parentId = selectedNodes[0];
       const questionId = this.nodeIdCounter++;
       this.nodes.add({
         id: questionId,
         label: "Question",
         title: `Question: ${question}`,
         font: { size: 0 },
-        color: { background: getCSSVariableValue("--question-node-color") },
         shape: "dot",
         size: 15,
       });
       this.edges.add({
-        from: this.activeChainParentId,
+        from: parentId,
         to: questionId,
       });
-      this.activeChainParentId = questionId;
       this.network.redraw();
     } else {
       alert("Please enter a question!");

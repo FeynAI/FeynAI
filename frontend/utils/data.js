@@ -1,3 +1,4 @@
+//useless for the moment, going to switch to a backend solution
 class DataHandler {
   loadData() {
     const savedNodes = localStorage.getItem('nodes');

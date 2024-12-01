@@ -1,6 +1,6 @@
 :root {
-  --topic-node-color: #eb3678; /* Purple color for topic nodes */
-  --selected-node-color: #ff0000; /* Red color for selected nodes */
+  --topic-node-color: #cbd5e1; /* Purple color for topic nodes */
+  --selected-node-color: #2662bd; /* Red color for selected nodes */
   --question-node-color: #06d001; /* Green color for question nodes */
 }
 
