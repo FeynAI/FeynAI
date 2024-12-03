@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "../../utils/api";
 import Image from "next/image";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -13,7 +15,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("https://feynai.onrender.com/auth/login", formData);
+      const response = await axios.post(`/auth/login`, formData);
       localStorage.setItem("access_token", response.data.access_token); // Save JWT in localStorage
       console.log(localStorage.getItem("access_token"))
       alert("Login successful!");
@@ -31,7 +33,7 @@ export default function LoginPage() {
       }}
     >
       <div className="flex items-center mb-6">
-        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
+        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" width={32} height={32}/>
         <h1
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",

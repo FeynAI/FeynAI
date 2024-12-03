@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import axios from "../../utils/api";
 import Image from "next/image";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function StartScreen() {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -30,7 +32,7 @@ export default function StartScreen() {
           return;
         }
 
-        const response = await axios.get("https://feynai.onrender.com/auth/me", {
+        const response = await axios.get(`/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -55,7 +57,7 @@ export default function StartScreen() {
       }
 
       const response = await axios.post(
-        "https://feynai.onrender.com/sessions/start-session",
+        `/sessions/start-session`,
         { topic },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -86,7 +88,7 @@ export default function StartScreen() {
           {/* Header with Logo */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+              <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" width={32} height={32} />
               <h1
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",

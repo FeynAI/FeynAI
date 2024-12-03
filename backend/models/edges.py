@@ -4,7 +4,7 @@ from utils.db import Base
 
     
 
-class Edge(Base):
+class Edges(Base):
     """
     Represents an edge in a conversation graph.
     An edge connects two nodes in a conversation.

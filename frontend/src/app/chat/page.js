@@ -7,6 +7,8 @@ import MindmapView from "./components/Mindmap/MindmapView";
 import MindmapControls from "./components/Mindmap/MindmapControls";
 import Image from "next/image";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 function ChatContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -15,18 +17,18 @@ function ChatContent() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  // TODO: no more first question
   useEffect(() => {
     const fetchFirstQuestion = async () => {
       try {
         const token = localStorage.getItem("access_token");
         if (!token) {
           alert("No access token found. Redirecting to login.");
-          router.push("https://feynai.onrender.com/login");
+          router.push(`${apiBaseUrl}/login`);
           return;
         }
         setIsLoading(true);
-        const response = await axios.get(`https://feynai.onrender.com/sessions/${sessionId}/first-question`, {
+        const response = await axios.get(`/sessions/${sessionId}/first-question`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMessages([
@@ -59,6 +61,7 @@ function ChatContent() {
         return;
       }
       const response = await chatApi.submitAnswer(sessionId, input, topic);
+      console.log(response);
       setMessages((prevMessages) => [
         ...prevMessages,
         { role: "user", content: input },
@@ -73,13 +76,17 @@ function ChatContent() {
     }
   };
 
+  useEffect(() => {
+    console.log(messages);
+  }, [messages]);
+
   return (
     <div className="h-screen flex bg-gradient-to-b from-white to-[#E3F2FF]">
       {/* Sidebar */}
       <aside className="w-64 flex-shrink-0 h-full border-r border-gray-200">
         <div className="p-6">
           <div className="flex items-center mb-6">
-            <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+            <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" width={32} height={32}/>
             <h1
               className="text-xl font-bold"
               style={{

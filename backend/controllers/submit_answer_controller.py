@@ -2,11 +2,11 @@ from fastapi import UploadFile
 from typing import Union
 from utils.groq import transcribe_audio
 from utils.llm import check_answer, generate_ideal_answer, get_follow_up_question
-from utils.chat_history_service import save_chat_message, get_last_message, get_chat_history
+from utils.chat_history_service import get_answered_question
 from utils.formatting import format_history
 from sqlalchemy.orm import Session
 from schemas.response import ModelResponse
-from models.session import Session as SessionModel
+from models.conversation import Conversation
 import os
 import logging
 
@@ -49,28 +49,29 @@ async def process_answer(
         raise ValueError("Invalid input type. Expected an audio file or text string.")
 
     # Save user answer and calculate score
-    save_chat_message(db, current_user.id, session_id, "user", user_answer)
-    last_question = get_last_message(db, session_id, "assistant").message
-    print("LAST QUESTION", last_question)
-    ideal_answer = generate_ideal_answer(last_question)
-    score = check_answer(user_answer, ideal_answer)
+    # save_chat_message(db, current_user.id, session_id, "user", user_answer)
+    # last_question = get_last_message(db, session_id, "assistant").message
+    # print("LAST QUESTION", last_question)
+    # ideal_answer = generate_ideal_answer(last_question)
+    # score = check_answer(user_answer, ideal_answer)
 
     # Update session score
-    session = db.query(SessionModel).filter(SessionModel.id == session_id).first()
+    session = db.query(Conversation).filter(Conversation.id == session_id).first()
     if not session:
         raise ValueError(f"Session with ID {session_id} not found.")
-    session.score += score
-    print(score)
+    # session.score += score
+    # print(score)
     db.commit()
 
-    # Determine response
-    if score < 50:
-        print("you've entered under 50")
-        save_chat_message(db, current_user.id, session_id, "assistant", "If you know, you know.")
-        return ModelResponse(message="If you know, you know.", score=score)
+    # disabled the if you know you know response, the node will be red but not blocking
+    # # Determine response
+    # if score < 50:
+    #     print("you've entered under 50")
+    #     save_chat_message(db, current_user.id, session_id, "assistant", "If you know, you know.")
+    #     return ModelResponse(message="If you know, you know.", score=score)
 
-    chat_history = format_history(get_chat_history(db, session_id, current_user.id))
+    chat_history = get_answered_question(db, session_id, current_user.id)
     next_question = get_follow_up_question(chat_history, topic)
     print(next_question)
-    save_chat_message(db, current_user.id, session_id, "assistant", next_question)
+    # save_chat_message(db, current_user.id, session_id, "assistant", next_question)
     return ModelResponse(message="Good job!", follow_up_question=next_question, score=score)

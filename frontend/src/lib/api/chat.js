@@ -1,6 +1,8 @@
 // src/lib/api/chat.js
 import api from "./axios";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export const chatApi = {
   submitAnswer: async (sessionId, input, topic) => {
     const formData = new FormData();
@@ -17,7 +19,7 @@ export const chatApi = {
       throw new Error("Access token not found");
     }
 
-    const response = await api.post("https://feynai.onrender.com/submit-answer", formData, {
+    const response = await api.post(`/submit-answer`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -36,7 +38,7 @@ export const chatApi = {
     if (!token) {
       throw new Error("Access token not found");
     }
-    const response = await api.get(`https://feynai.onrender.com/sessions/${sessionId}/mindmap`, {
+    const response = await api.get(`${apiBaseUrl}/sessions/${sessionId}/mindmap`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,7 +51,7 @@ export const chatApi = {
     if (!token) {
       throw new Error("Access token not found");
     }
-    const response = await api.patch(`https://feynai.onrender.com/sessions/${sessionId}/mindmap/nodes/${nodeId}`, data, {
+    const response = await api.patch(`${apiBaseUrl}/sessions/${sessionId}/mindmap/nodes/${nodeId}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

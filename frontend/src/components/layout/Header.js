@@ -7,7 +7,7 @@ export default function Header() {
     <header className="w-full max-w-[1440px] px-4 md:px-6 lg:px-8 relative flex items-center justify-between">
       {/* Logo and title */}
       <div className="flex items-center">
-        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" />
+        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-8 h-8 mr-2" width={32} height={32} />
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold"
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",

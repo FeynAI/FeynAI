@@ -1,40 +1,23 @@
-from models.chat_history import ChatHistory
+import logging
+from models.nodes import Nodes
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
-import time
+from typing import List
 
-def save_chat_message(db: Session, user_id: int, session_id: str, role: str, message: str):
-    """
-    Save a chat message to the database.
-    """
-    chat_entry = ChatHistory(
-        user_id=user_id,
-        session_id=session_id,
-        role=role,
-        message=message,
-        timestamp=datetime.fromtimestamp(time.time(), tz=timezone.utc)
-    )
-    db.add(chat_entry)
-    db.commit()
+# Configure the logger
+logger = logging.getLogger(__name__)
 
-def get_chat_history(db: Session, session_id: str, user_id: int):
+def get_answered_question(db: Session, conversation_id: int) -> List[str]:
     """
-    Retrieve all chat messages for a given session ID and user ID.
-    """
-    return (
-        db.query(ChatHistory)
-        .filter(ChatHistory.session_id == session_id, ChatHistory.user_id == user_id)
-        .order_by(ChatHistory.timestamp)
-        .all()
-    )
+    Retrieve the history of already answered questions for a given session.
 
-def get_last_message(db: Session, session_id: str, role: str):
+    Args:
+        db (Session): The database session to use for querying the chat history.
+        conversation_id (int): The ID of the session to retrieve the chat history for.
+
+    Returns:
+        List[str]: A list of chat history entries for the given session.
     """
-    Retrieve the last message from a specific role ('user' or 'assistant') in a session.
-    """
-    return (
-        db.query(ChatHistory)
-        .filter(ChatHistory.session_id == session_id, ChatHistory.role == role)
-        .order_by(ChatHistory.timestamp.desc())
-        .first()
-    )
+    nodes = db.query(Nodes).filter(Nodes.conversation_id == conversation_id).all()
+    answered_questions = [node.question for node in nodes if node.question is not None] # can be None as the root node has no question
+    logger.debug(f"Retrieved {len(answered_questions)} answered questions for conversation {conversation_id}")
+    return answered_questions

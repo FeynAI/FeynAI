@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from utils.db import Base
 
-from sqlalchemy.orm import relationship
 class User(Base):
     __tablename__ = "users"
 
@@ -10,8 +9,5 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
 
-    # Relationships
-    sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
-    chat_histories = relationship("ChatHistory", back_populates="user", cascade="all, delete-orphan")  # Necessary
-
-
+    # Each user has multiple Conversation
+    conversations = relationship("Conversation", back_populates="user", cascade="all, delete-orphan")

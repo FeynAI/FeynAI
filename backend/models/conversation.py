@@ -1,8 +1,11 @@
-from datetime import datetime, timezone
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
 from utils.db import Base
+from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
+from sqlalchemy.orm import relationship
 import uuid
+from datetime import datetime, timezone
+
+from .nodes import Nodes
+from .edges import Edges
 
 class Conversation(Base):
     """
@@ -15,7 +18,7 @@ class Conversation(Base):
         updated_at (datetime): Timestamp when the conversation was last updated, defaults to the current UTC time and updates on modification.
         user (User): Relationship to the User model, representing the user associated with the conversation.
     """
-    __tablename__ = "Conversation"
+    __tablename__ = "conversation"
 
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()), index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
@@ -25,6 +28,6 @@ class Conversation(Base):
     updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))  # Updated
     
     nodes = relationship("Nodes", back_populates="conversation", cascade="all, delete-orphan")
-    edges = relationship("Edge", back_populates="conversation", cascade="all, delete-orphan")
+    edges = relationship("Edges", back_populates="conversation", cascade="all, delete-orphan")
     
-    user = relationship("User", back_populates="conversation")
+    user = relationship("User", back_populates="conversations")

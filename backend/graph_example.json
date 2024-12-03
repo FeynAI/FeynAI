@@ -1,0 +1,31 @@
+{
+  "nodeId": "1",
+  "topic": "Root question",
+  "followup": [
+    {
+      "nodeId": "2",
+      "question": "Child question 1",
+      "answer": "Answer 2",
+      "score": 0,
+      "parent": "1",
+      "followup": [
+        {
+          "nodeId": "4",
+          "question": "Grandchild question",
+          "answer": "Answer 4",
+          "score": 0,
+          "parent": "2",
+          "followup": []
+        }
+      ]
+    },
+    {
+      "nodeId": "3",
+      "question": "Child question 2",
+      "answer": "Answer 3",
+      "score": 0,
+      "parent": "1",
+      "followup": []
+    }
+  ]
+}

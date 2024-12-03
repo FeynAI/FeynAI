@@ -1,7 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models.user import User
-from models.chat_history import ChatHistory
 from routers import auth, submit_answer, session,  leaderboard
 from utils.db import engine, Base
 

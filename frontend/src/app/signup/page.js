@@ -4,6 +4,9 @@ import { useState } from "react";
 import axios from "../../utils/api";
 import Image from "next/image";
 
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+
 export default function SignupPage() {
   const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "" });
 
@@ -17,7 +20,8 @@ export default function SignupPage() {
       return;
     }
     try {
-      await axios.post("https://feynai.onrender.com/auth/signup", { email: formData.email, password: formData.password });
+      console.log(apiBaseUrl)
+      await axios.post(`/auth/signup`, { email: formData.email, password: formData.password });
       alert("Signup successful!");
       window.location.href = "/login"; // Redirect to login screen
     } catch (error) {
@@ -33,7 +37,7 @@ export default function SignupPage() {
       }}
     >
       <div className="flex items-center mb-6">
-        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" />
+        <Image src="/images/logo.png" alt="FeynAI Logo" className="w-16 h-16 mr-2" width={32} height={32} />
         <h1
           style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
